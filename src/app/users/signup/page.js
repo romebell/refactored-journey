@@ -21,7 +21,7 @@ const Signup = () => {
 	const [state, setState] = useState('');
 	const [zipCode, setZipCode] = useState('');
 	const [error, setError] = useState(false);
-	console.log('cookies on Signup', Cookies.get())
+	console.log('cookies on Signup', Cookies.get());
 
 	// create the 
 	const handleFirstName = (e) => {

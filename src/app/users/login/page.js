@@ -34,9 +34,9 @@ export default function Login() {
 		axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/login`, { email, password })
 			.then(response => {
 				
-                localStorage.setItem('jwtToken', response.data.token);
-                localStorage.setItem('email', response.data.userData.email);
-                localStorage.setItem('expiration', response.data.userData.exp);
+                Cookies.set('jwtToken', response.data.token);
+                Cookies.set('email', response.data.userData.email);
+                Cookies.set('expiration', response.data.userData.exp);
                 setAuthToken(response.data.token);
                 let decoded = jwtDecode(response.data.token);
 				setRedirect(true);

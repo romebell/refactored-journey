@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import Cookies from 'js-cookie';
 
 const Signup = () => {
 	const router = useRouter();
@@ -20,6 +21,7 @@ const Signup = () => {
 	const [state, setState] = useState('');
 	const [zipCode, setZipCode] = useState('');
 	const [error, setError] = useState(false);
+	console.log('cookies on Signup', Cookies.get())
 
 	// create the 
 	const handleFirstName = (e) => {

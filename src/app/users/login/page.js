@@ -5,6 +5,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import setAuthToken from '@/app/utils/setAuthToken';
 import jwtDecode from 'jwt-decode';
+import { cookies } from 'next/dist/client/components/headers';
+import Cookies from 'js-cookie';
+// import jsCookie from 'js-cookie';
 
 export default function Login() {
     const router = useRouter();
@@ -12,6 +15,8 @@ export default function Login() {
     const [email, setEmail] = useState('');
 	const [password, setPassword] = useState('');
 	const [error, setError] = useState(false);
+    Cookies.set('name', 'value')
+    console.log('cookie', Cookies.get());
 
     const handleEmail = (e) => {
 		// fill in code

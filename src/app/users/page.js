@@ -1,11 +1,13 @@
 'use client'
 import { useEffect, useState } from 'react';
 import UserTable from './UserTable';
+import Cookies from 'js-cookie';
 
 export default function Home() {
     // state is what the data is representing in realtime
     const [data, setData] = useState(null);
     const [isLoading, setLoading] = useState(true);
+    Cookies.set('age', 35);
   
     useEffect(() => {
       fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users`)

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import jwtDecode from 'jwt-decode';
 import { useRouter } from 'next/navigation';
 import handleLogout from '@/app/utils/handleLogout';
+import Cookies from 'js-cookie';
 
 export default function Profile() {
     // state is what the data is representing in realtime
@@ -12,9 +13,8 @@ export default function Profile() {
     const [isLoading, setLoading] = useState(true);
 
     if (typeof window !== 'undefined') {
-        const expirationTime = new Date(localStorage.getItem('expiration') * 1000);
+        const expirationTime = new Date(Cookies.get()['expiration'] * 1000);
         let currentTime = Date.now();
-        console.log(expirationTime, localStorage);
 
         // make a condition that compares exp and current time
         if (currentTime >= expirationTime) {
@@ -25,13 +25,13 @@ export default function Profile() {
     }
 
     useEffect(() => {
-        if (localStorage.getItem('jwtToken')) {
-            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/email/${localStorage.getItem('email')}`)
+        if (Cookies.get()['jwtToken']) {
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/users/email/${Cookies.get()['email']}`)
                 .then((res) => res.json())
                 .then((data) => {
                     // data is an object
-                    let userData = jwtDecode(localStorage.getItem('jwtToken'));
-                    if (userData.email === localStorage.getItem('email')) {
+                    let userData = jwtDecode(Cookies.get()['jwtToken']);
+                    if (userData.email === Cookies.get()['email']) {
                         setData(data.user[0]);
                         setLoading(false);
                     } else {
